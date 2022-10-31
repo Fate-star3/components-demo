@@ -4,7 +4,8 @@ import { useMemoizedFn } from './index'
 
 /** 节流 */
 function useThrottle<T extends Function>(fn: T, delay: number) {
-  const { current } = useRef({ fn, timer: null })
+  const { current } = useRef<{ fn: T; timer: NodeJS.Timeout | null }>({ fn, timer: null })
+
   useEffect(() => {
     current.fn = fn
   }, [fn])
