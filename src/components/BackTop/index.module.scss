@@ -1,0 +1,26 @@
+.back {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5715;
+  font-feature-settings: "tnum";
+  position: fixed;
+  right: 100px;
+  bottom: 50px;
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  .back_top {
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    border-radius: 4px;
+    background-color: rgb(16, 136, 233);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    font-size: 14px;
+  }
+}
