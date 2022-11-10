@@ -1,7 +1,7 @@
 module.exports = {
   processors: [],
   plugins: ['stylelint-order'],
-  extends: ['stylelint-config-standard', 'stylelint-scss', 'stylelint-config-css-modules'],
+  extends: ['stylelint-config-standard', 'stylelint-scss', 'stylelint-less', 'stylelint-config-css-modules'],
   rules: {
     'color-function-notation': null,
     'color-named': null,

@@ -3,14 +3,14 @@ import React, { useState, useRef, useEffect } from 'react'
 const VirtualList = () => {
   const [dataList, setDataList] = useState([]) /* 保存数据源 */
   const [position, setPosition] = useState([0, 0]) /* 截取缓冲区 + 视图区索引 */
-  const scroll = useRef(null) /* 获取scroll元素 */
-  const box = useRef(null) /* 获取元素用于容器高度 */
-  const context = useRef(null) /* 用于移动视图区域，形成滑动效果。 */
+  const scroll = useRef<HTMLDivElement>(null) /* 获取scroll元素 */
+  const box = useRef<HTMLDivElement>(null) /* 获取元素用于容器高度 */
+  const context = useRef<HTMLDivElement>(null) /* 用于移动视图区域，形成滑动效果。 */
   const scrollInfo = useRef({
     height: 500 /* 容器高度 */,
     bufferCount: 8 /* 缓冲区个数 */,
     itemHeight: 60 /* 每一个item高度 */,
-    renderCount: 0 /* 渲染区个数 */,
+    renderCount: 0 /* 渲染区个数 */
   })
 
   useEffect(() => {
@@ -45,7 +45,7 @@ const VirtualList = () => {
     <div className='list_box' ref={box}>
       <div
         className='scroll_box'
-        style={{ height: height + 'px' }}
+        style={{ height: `${height}px` }}
         onScroll={handleScroll}
         ref={scroll}
       >
@@ -54,7 +54,7 @@ const VirtualList = () => {
           {renderList.map((item, index) => (
             <div className='list' key={index}>
               {' '}
-              {item + ''} Item{' '}
+              {`${item}`} Item{' '}
             </div>
           ))}
         </div>

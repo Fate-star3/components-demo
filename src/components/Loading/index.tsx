@@ -5,7 +5,7 @@ export default {
   root: document.getElementById('loading'),
   on: () => {
     const container = document.getElementById('loading')
-    container.setAttribute('style', 'display: block')
+    container && container.setAttribute('style', 'display: block')
   },
   off: () => {
     const container = document.getElementById('loading')
@@ -22,5 +22,5 @@ export default {
         {/* <p>加载中...</p> */}
       </div>
     )
-  },
+  }
 }

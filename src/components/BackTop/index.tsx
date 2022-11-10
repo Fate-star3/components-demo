@@ -1,31 +1,32 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
+
 import styles from './index.module.scss'
-import { useThrottle } from '@/hooks'
+
 interface IBackProps {
-  duration?: number;
-  target?: () => HTMLElement;
-  visibilityHeight?: number;
-  onClick?: () => void;
+  duration?: number
+  target?: () => HTMLElement
+  visibilityHeight?: number
+  onClick?: () => void
 }
 let scrollTop: number
-const BackTop: React.FC<IBackProps> = (props) => {
+const BackTop: React.FC<IBackProps> = props => {
   const {
     duration = 2000,
     visibilityHeight = 400,
     target = () => window,
-    onClick = () => window.scrollTo(0, 0) }
-    = props
+    onClick = () => window.scrollTo(0, 0)
+  } = props
   const [visible, setVisible] = useState<boolean>(false)
   const dom = target()
-  console.log(dom);
+  console.log(dom)
 
   useEffect(() => {
-
     function fn() {
       if (dom === window) {
-        scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+        scrollTop =
+          document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop
       } else {
-        scrollTop = dom.scrollTop
+        // scrollTop = dom.scrollTop
       }
 
       if (scrollTop > visibilityHeight) {
@@ -33,10 +34,9 @@ const BackTop: React.FC<IBackProps> = (props) => {
       } else {
         visible && setVisible(false)
       }
-      console.log(scrollTop, 'scrollTop1');
-
+      console.log(scrollTop, 'scrollTop1')
     }
-    console.log(dom);
+    console.log(dom)
     dom && dom.addEventListener('scroll', fn)
     return () => {
       dom && dom.removeEventListener('scroll', fn)
@@ -44,7 +44,7 @@ const BackTop: React.FC<IBackProps> = (props) => {
   }, [dom, visible])
 
   const backTop = () => {
-    // onClick && onClick()
+    onClick && onClick()
     if (scrollTop > 0) {
       window.requestAnimationFrame(backTop)
       window.scrollTo(0, scrollTop - scrollTop / 8)
@@ -66,19 +66,20 @@ const BackTop: React.FC<IBackProps> = (props) => {
     }, interval_time)
      */
 
-
     setVisible(!visible)
   }
 
   return (
     <div className={styles.back} onClick={backTop}>
-      {
-        visible && <div className={styles.back_top} style={{ transition: `all  ${duration / 1000}s ease-in-out` }}>
+      {visible && (
+        <div
+          className={styles.back_top}
+          style={{ transition: `all  ${duration / 1000}s ease-in-out` }}
+        >
           UP
         </div>
-      }
+      )}
     </div>
-
   )
 }
 

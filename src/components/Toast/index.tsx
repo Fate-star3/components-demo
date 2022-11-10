@@ -7,16 +7,16 @@ export default {
     const container = document.getElementById('toast')
     if (timer) {
       clearTimeout(timer)
-      container.setAttribute('style', 'display: none')
+      container && container.setAttribute('style', 'display: none')
     }
     if (!content) {
       return false
     }
     const toastEl = document.getElementById('toast-content')
     toastEl.innerHTML = content
-    container.setAttribute('style', 'display: block')
+    container && container.setAttribute('style', 'display: block')
     timer = setTimeout(() => {
-      container.setAttribute('style', 'display: none')
+      container && container.setAttribute('style', 'display: none')
     }, duration)
   },
   init: () => {
@@ -25,5 +25,5 @@ export default {
         <p id='toast-content' className='toast-content' />
       </div>
     )
-  },
+  }
 }

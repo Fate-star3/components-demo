@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
-import BackTop from "@/components/BackTop";
+import { useEffect, useState } from 'react'
+
+import BackTop from '@/components/BackTop'
 import Drag from '@/components/Drag'
 
 const Home = () => {
@@ -10,7 +11,7 @@ const Home = () => {
 
   return (
     <>
-      <div id="anchor">header</div>
+      <div id='anchor'>header</div>
       <BackTop
         duration={2000}
         // target={(): HTMLElement => target as HTMLElement}
@@ -19,6 +20,6 @@ const Home = () => {
       <Drag />
     </>
   )
-};
+}
 
-export default Home;
+export default Home

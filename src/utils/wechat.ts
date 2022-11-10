@@ -114,6 +114,4 @@
 //     })
 //   },
 // }
-export default {
-
-}
+export default {}

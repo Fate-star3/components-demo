@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef, Children } from 'react'
+
 import styles from './index.module.scss'
 
 interface Data {
-  id: number;
-  name: string;
-  age: string;
-  msg: string;
+  id: number
+  name: string
+  age: string
+  msg: string
 }
 const Item = (props: { data: Data[] }) => {
   const { data } = props
@@ -16,26 +17,27 @@ const Item = (props: { data: Data[] }) => {
         <span>Age</span>
         <span>Message</span>
       </div>
-      {
-        data.map((item, index) => {
-          return (
-            <li className={styles.item}  >
-              <span>{item.name}</span>
-              <span>{item.age}</span>
-              <span>{item.msg}</span>
-            </li>
-          )
-        })
-      }
+      {data.map((item, index) => {
+        return (
+          <li className={styles.item} key={index}>
+            <span>{item.name}</span>
+            <span>{item.age}</span>
+            <span>{item.msg}</span>
+          </li>
+        )
+      })}
     </div>
   )
 }
 
+let startIndex: number
+let endIndex: number
 
-let startIndex: number, endIndex: number
-
-const Drop = (props: { children: any; dataSource: Data[]; onDropSuccess: (val: Data[]) => void }) => {
-
+const Drop = (props: {
+  children: any
+  dataSource: Data[]
+  onDropSuccess: (val: Data[]) => void
+}) => {
   const { children, dataSource, onDropSuccess } = props
   const data: Data[] = dataSource.slice()
 
@@ -43,14 +45,10 @@ const Drop = (props: { children: any; dataSource: Data[]; onDropSuccess: (val: D
     console.warn('dataSource', dataSource)
   }, [dataSource])
 
-  const swap = (
-    arr: any[], start: number, end: number
-  ) => {
-    [arr[start], arr[end]] = [arr[end], arr[start]]
+  const swap = (arr: any[], start: number, end: number) => {
+    ;[arr[start], arr[end]] = [arr[end], arr[start]]
   }
-  const reorder = (
-    arr: any[], start: number, end: number
-  ) => {
+  const reorder = (arr: any[], start: number, end: number) => {
     const result = Array.from(arr)
     const [removed] = result.splice(start, 1)
     result.splice(end, 0, removed)
@@ -59,28 +57,26 @@ const Drop = (props: { children: any; dataSource: Data[]; onDropSuccess: (val: D
 
   const handleDragStart = (e: React.DragEvent<HTMLLIElement>, index: number) => {
     startIndex = index
-    console.log(' handleDragStart');
+    console.log(' handleDragStart')
 
     e.currentTarget.classList.add('curr')
-
   }
   const handleDragEnter = (e: React.DragEvent<HTMLLIElement>, index: number) => {
     e.preventDefault()
     endIndex = index
-    console.log('onDragEnter');
+    console.log('onDragEnter')
     swap(data, startIndex, endIndex)
-    console.log(data, startIndex, endIndex);
+    console.log(data, startIndex, endIndex)
     onDropSuccess(data)
   }
-  const handleDragEnd = (e: { preventDefault: any; currentTarget: any; }) => {
+  const handleDragEnd = (e: { preventDefault: any; currentTarget: any }) => {
     e.preventDefault()
     e.currentTarget.classList.remove('curr')
-
   }
   const handleDragLeave = (e: React.DragEvent<HTMLLIElement>, index: number) => {
     e.preventDefault()
     endIndex = index
-    console.log('handleDragLeave');
+    console.log('handleDragLeave')
     swap(data, startIndex, endIndex)
     onDropSuccess(data)
   }
@@ -88,11 +84,11 @@ const Drop = (props: { children: any; dataSource: Data[]; onDropSuccess: (val: D
     e.preventDefault()
     endIndex = index
     swap(data, startIndex, endIndex)
-    console.log('handleDrop', data, startIndex, endIndex);
+    console.log('handleDrop', data, startIndex, endIndex)
     onDropSuccess(data)
   }
   const uiList = () => {
-    console.log('uilist');
+    console.log('uilist')
 
     return children.map((item: any, index: number) => {
       return {
@@ -102,12 +98,15 @@ const Drop = (props: { children: any; dataSource: Data[]; onDropSuccess: (val: D
           draggable: true,
           onDragStart: (e: React.DragEvent<HTMLLIElement>) => handleDragStart(e, index),
           // onDragEnter: (e: React.DragEvent<HTMLLIElement>) => handleDragEnter(e, index),
-          onDragOver: (e: { preventDefault: () => void; }) => {
+          onDragOver: (e: { preventDefault: () => void }) => {
             e.preventDefault()
           },
           onDrop: (e: React.DragEvent<HTMLLIElement>) => handleDrop(e, index),
           // onDragLeave: (e: React.DragEvent<HTMLLIElement>) => handleDragLeave(e, index),
-          onDragEnd: (e: { preventDefault: () => void; currentTarget: { classList: { remove: (arg0: string) => void; }; }; }) => handleDragEnd(e)
+          onDragEnd: (e: {
+            preventDefault: () => void
+            currentTarget: { classList: { remove: (arg0: string) => void } }
+          }) => handleDragEnd(e)
         }
       }
     })
@@ -118,13 +117,10 @@ const Drop = (props: { children: any; dataSource: Data[]; onDropSuccess: (val: D
       {uiList()}
       {/* {children} */}
     </>
-
   )
 }
 
-
 const Main = () => {
-
   const state = [
     {
       id: 1,
@@ -143,7 +139,7 @@ const Main = () => {
       name: 'Bob',
       age: '18',
       msg: 'i am a cat'
-    },
+    }
   ]
   const [dataMain, setDataMain] = useState<Data[]>(state)
 
@@ -155,21 +151,22 @@ const Main = () => {
           <span>Age</span>
           <span>Message</span>
         </div>
-        <Drop dataSource={dataMain} onDropSuccess={(newVal: React.SetStateAction<Data[]>) => {
-          console.warn('newVal', newVal)
-          setDataMain(newVal)
-        }} >
-          {
-            dataMain.map((item) => {
-              return (
-                <li className={styles.item} key={item.id}  >
-                  <span>{item.name}</span>
-                  <span>{item.age}</span>
-                  <span>{item.msg}</span>
-                </li>
-              )
-            })
-          }
+        <Drop
+          dataSource={dataMain}
+          onDropSuccess={(newVal: React.SetStateAction<Data[]>) => {
+            console.warn('newVal', newVal)
+            setDataMain(newVal)
+          }}
+        >
+          {dataMain.map(item => {
+            return (
+              <li className={styles.item} key={item.id}>
+                <span>{item.name}</span>
+                <span>{item.age}</span>
+                <span>{item.msg}</span>
+              </li>
+            )
+          })}
         </Drop>
       </div>
     </>

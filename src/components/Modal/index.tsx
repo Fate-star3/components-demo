@@ -16,7 +16,7 @@ const Modal = (props: {
 
   const handleModalClick = () => {
     if (allowcCloseOnClick) {
-      onSetVisible(false)
+      onSetVisible && onSetVisible(false)
     }
   }
 
@@ -35,7 +35,7 @@ const Modal = (props: {
           <div
             className={styles.modal_mask}
             onClick={() => {
-              onSetVisible(!visible)
+              onSetVisible && onSetVisible(!visible)
               document.body.style.overflow = ''
             }}
           />
