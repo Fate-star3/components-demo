@@ -1,0 +1,109 @@
+.report_wrapper {
+  position: absolute;
+  z-index: 9;
+
+  .content {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+
+    .report_list {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+
+      .left,
+      .right {
+        width: 70px;
+        height: 70px;
+        margin: 0 24px;
+      }
+
+      .report_mobile {
+        width: 506px;
+        height: 900px;
+        border-radius: 40px;
+        opacity: 1;
+      }
+
+      .report_tablet {
+        width: 340px;
+        height: 604px;
+        border-radius: 40px;
+        opacity: 1;
+      }
+    }
+  }
+
+  .dot_list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+
+    .cur_dot {
+      width: 20px;
+      height: 14px;
+      background: #fff;
+      border-radius: 10px;
+    }
+
+    .dot {
+      width: 20px;
+      height: 14px;
+      margin: 0 6px;
+      background: #fff;
+      border-radius: 10px;
+      opacity: 0.5;
+    }
+  }
+
+  .footer {
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .app {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 46px;
+
+      img {
+        width: 130px;
+        margin: 0 55px;
+      }
+    }
+
+    .guide {
+      width: 400px;
+      margin-top: 12px;
+    }
+
+    .close {
+      width: 74px;
+      margin-top: 20px;
+    }
+  }
+
+  .mask {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 99;
+    overflow: hidden;
+    background-color: #000;
+    opacity: 0.7;
+  }
+}

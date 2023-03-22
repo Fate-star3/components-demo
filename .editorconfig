@@ -1,3 +1,4 @@
+# 统一团队vscode编辑器默认配置。
 root = true # 控制配置文件 .editorconfig 是否生效的字段
 ​
 [**] # 匹配全部文件

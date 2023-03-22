@@ -1,9 +1,10 @@
+// 检测代码语法规范和错误
 module.exports = {
   root: true,
   env: {
     browser: true,
     es6: true,
-    node: true,
+    node: true
   },
   extends: [
     'airbnb',
@@ -14,24 +15,24 @@ module.exports = {
     'plugin:import/warnings',
     'plugin:prettier/recommended',
     'plugin:react/recommended',
-    'plugin:react-hooks/recommended',
+    'plugin:react-hooks/recommended'
   ],
   // ESLint 默认使用Espree作为其解析器，你可以在配置文件中指定一个不同的解析器
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
-      jsx: true,
-    },
+      jsx: true
+    }
   },
   // 在配置文件里配置插件时，可以使用 plugins 关键字来存放插件名字的列表。插件名称可以省略 eslint-plugin- 前缀。
   plugins: ['import'],
   settings: {
     'import/resolver': {
       node: {
-        dictionary: ['./src', 'node_modules'],
+        dictionary: ['./src', 'node_modules']
       },
-      alias: [['@', './src']],
-    },
+      alias: [['@', './src']]
+    }
   },
   rules: {
     // https://github.com/airbnb/javascript/issues/2505 修改一些airbnb的规则
@@ -86,14 +87,14 @@ module.exports = {
       2,
       {
         namedComponents: 'arrow-function',
-        unnamedComponents: 'arrow-function',
-      },
+        unnamedComponents: 'arrow-function'
+      }
     ],
     'arrow-body-style': 'off',
     'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
     'react/jsx-filename-extension': [
       'error',
-      { extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'] },
+      { extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'] }
     ],
     'jsx-a11y/click-events-have-key-events': 'off',
     'jsx-a11y/no-static-element-interactions': 'off',
@@ -104,8 +105,8 @@ module.exports = {
         ts: 'never',
         jsx: 'never',
         js: 'never',
-        json: 'never',
-      },
+        json: 'never'
+      }
     ],
     'import/no-unresolved': 'off',
     'import/no-absolute-path': 'off',
@@ -120,16 +121,16 @@ module.exports = {
           'parent',
           'index',
           'object',
-          'unknown',
+          'unknown'
         ],
         alphabetize: {
           order: 'asc',
-          caseInsensitive: true,
+          caseInsensitive: true
         },
-        'newlines-between': 'always',
-      },
+        'newlines-between': 'always'
+      }
     ],
     'import/prefer-default-export': 'off',
-    'no-underscore-dangle': 'off',
-  },
+    'no-underscore-dangle': 'off'
+  }
 }

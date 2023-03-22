@@ -1,3 +1,4 @@
+// 保存文件自动格式化代码
 module.exports = {
   printWidth: 100, // 一行的字符数，如果超过会进行换行
   tabWidth: 2, // 一个tab代表几个空格数，默认就是2

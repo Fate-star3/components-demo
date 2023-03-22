@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="file" accept="image/*" multiple onchange="fileinfo(this.files)" />
+    <!-- <img
+      src="https://yuwen.xiongmaoboshi.com/test/img/pandaLogo-1657783999651-857.png"
+      id="droptarget"
+      alt=""
+    />
+    <img
+      src="https://yuwen.xiongmaoboshi.com/test/img/pandaLogo-1657783999651-857.png"
+      id="droptarget"
+      alt=""
+    /> -->
+    <input type="file" onchange="readfile(this.files[0])" />
+    <pre id="output"></pre>
+    <input type="file" onchange="typefile(this.files[0])" />
+    <input type="file" onchange="getFile(event)" />
+    <script>
+      function fileinfo(files) {
+        for (var i = 0; i < files.length; i++) {
+          var f = files[i]
+          console.log(f)
+
+          console.log(
+            f.name, // 文件名，不含路径
+            f.size, // 文件大小，Blob 实例属性
+            f.type, // 文件类型，Blob 实例属性
+            f.lastModifiedDate, // 文件的最后修改时间
+          )
+        }
+      }
+      function getBlob(url, callback) {
+        var xhr = new XMLHttpRequest()
+        xhr.open('GET', url)
+        xhr.responseType = 'blob'
+        xhr.onload = function () {
+          callback(xhr.response)
+        }
+        xhr.send(null)
+      }
+      // var droptarget = document.getElementById('droptarget')
+
+      // droptarget.ondrop = function (e) {
+      //   var files = e.dataTransfer.files
+      //   console.log(files)
+      //   for (var i = 0; i < files.length; i++) {
+      //     var type = files[i].type
+      //     if (type.substring(0, 6) !== 'image/') continue
+      //     var img = document.createElement('img')
+      //     img.src = URL.createObjectURL(files[i])
+      //     img.onload = function () {
+      //       this.width = 100
+      //       document.body.appendChild(this)
+      //       URL.revokeObjectURL(this.src)
+      //     }
+      //   }
+      // }
+
+      function readfile(f) {
+        var reader = new FileReader()
+        reader.readAsText(f)
+        reader.onload = function () {
+          console.log(reader)
+          var text = reader.result
+          var out = document.getElementById('output')
+          out.innerHTML = ''
+          out.appendChild(document.createTextNode(text))
+        }
+        reader.onerror = function (e) {
+          console.log('Error', e)
+        }
+      }
+      function typefile(file) {
+        // 文件开头的四个字节，生成一个 Blob 对象
+        var slice = file.slice(0, 4)
+        var reader = new FileReader()
+        // 读取这四个字节
+        reader.readAsArrayBuffer(slice)
+        reader.onload = function (e) {
+          var buffer = reader.result
+          console.log(buffer)
+          // 将这四个字节的内容，视作一个32位整数
+          var view = new DataView(buffer)
+          console.log(view)
+          var magic = view.getUint32(0, false)
+          // 根据文件的前四个字节，判断它的类型
+          switch (magic) {
+            case 0x89504e47:
+              file.verified_type = 'image/png'
+              break
+            case 0x47494638:
+              file.verified_type = 'image/gif'
+              break
+            case 0x25504446:
+              file.verified_type = 'application/pdf'
+              break
+            case 0x504b0304:
+              file.verified_type = 'application/zip'
+              break
+          }
+          console.log(file.name, file.verified_type)
+        }
+      }
+      function getFile(e) {
+        const file = e.target.files[0]
+        const files = new FileReader()
+        files.onload = e => {
+          if (files.readyState === 2) {
+            const result = e.target.result
+            console.log(result)
+          }
+        }
+        files.readAsDataURL(file)
+        const img = document.createElement('img')
+        // 读取完成后，result属性将返回一个 Data URL 格式（Base64 编码）的字符串，代表文件内容。对于图片文件，这个字符串可以用于<img>元素的src属性。注意，这个字符串不能直接进行 Base64 解码，必须把前缀data:*/*;base64,从字符串里删除以后，再进行解码。
+        img.src = files.result
+
+        document.body.appendChild(img)
+      }
+    </script>
+  </body>
+</html>
